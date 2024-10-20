@@ -1,0 +1,70 @@
+*
+{
+  box-sizing: border-box;
+}
+
+body
+{
+  background-image: url(../images/hans-jurgen-weinhardt-FZ5nx86tP2U-unsplash.jpg); 
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  margin: 0;
+}
+
+
+.Login
+{
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr [form] minmax(240px, 450px) 1fr;
+  grid-template-rows: 1fr [form] 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_login
+{
+  background-color: #ffdf88;
+  padding: 1em;
+  color: #505050;
+  grid-column: form;
+  grid-row: form;
+}
+
+.form_error
+{
+  background-color: #999999;
+  color: white;
+  font-weight: lighter;
+  padding: 0.3em 1em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+
+.form_field
+{
+  padding-bottom: 1em;
+}
+
+.form_field input[type=text], 
+.form_field input[type=password] 
+{
+  width: 100%;
+  padding: 0.3em;
+  font-size: 1.4em;
+}
+
+.btn
+{
+  width: 100%;
+  margin: 0.5em auto;
+}
+
+.btn_primary
+{
+  background-color: rgb(90, 60, 0);
+  color: white;
+  text-align: center;
+  border: none;
+  padding: 0.3em 2em;
+  font-size: 1.4em;
+}
