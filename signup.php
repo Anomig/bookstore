@@ -2,27 +2,18 @@
 	include_once(__DIR__ . "bookstore/classes/db.php");
 	include_once(__DIR__ . "bookstore/classes/Users.php");
 
-    function Login($email, $password){
-        if($email == "naomi@shop.be" && $password == "1234"){
-            return true;
-        }else{
-            return false;
-        }        
-    }
-
     if(!empty($_POST)){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $result = Login($email, $password);
-        if(Login($email, $password)){
-            session_start();
-            $_SESSION['login'] = true;
-            $_SESSION['email'] = $email;
-            header('Location: index.php');
-        }else{
-            $error = true;
+        try{
+            $user = new User();
+            $user->setFname($_POST['fname']);
+            $user->setLname($_POST['lname']);
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
+            $user->save();
         }
+    catch(Exception $e){
+        $error = $e->getMessage();
+    }
     }
 
 ?><!DOCTYPE html>
@@ -30,24 +21,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="Login">
 		<div class="form_login">
 			<form action="" method="post">
-				<h2 form__title>Login</h2>
+				<h2 form__title>Sign In</h2>
 
 				<?php if(isset($error)): ?>
 
 				<div class="form_error">
 					<p>
-						Sorry, we can't log you in with that email address and password. Can you try again?
+						Sorry, we can't sign you in. Can you try again?
 					</p>
 				</div>
 				<?php endif; ?>
-
+                
+                
+                <div class="form_field">
+					<label for="fname">First name</label>
+					<input type="text" name="email">
+				</div>
+                <div class="form_field">
+					<label for="lname">Last name</label>
+					<input type="text" name="email">
+				</div>
 				<div class="form_field">
 					<label for="Email">Email</label>
 					<input type="text" name="email">
@@ -57,13 +57,13 @@
 					<input type="password" name="password">
 				</div>
 
-				<div class="form_field">
+				<div class="form__field">
 					<input type="submit" value="Sign in" class="btn btn_primary">	
 					<input type="checkbox" id="rememberMe"><label for="rememberMe" class="label_inline">Remember me</label>
 				</div>
 
-				<div class="form_field">
-					<a href="./signup.php">sign in</a>
+                <div class="form_field">
+					<a href="./login.php">Al een account?</a>
 				</div>
 			</form>
 		</div>

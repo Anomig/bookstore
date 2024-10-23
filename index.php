@@ -1,11 +1,13 @@
 <?php 
+    include_once 'classes/Users.php';
+    include_once 'classes/db.php';
 
     session_start();
     if($_SESSION['login'] !== true){                                        // als de persoon niet is ingelogd, ga naar login.php    
         header('Location: login.php');
     }
 
-    include_once 'classes/db.php';
+    
 
 ?><!DOCTYPE html>
 <html lang="en">
