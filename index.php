@@ -5,6 +5,8 @@
         header('Location: login.php');
     }
 
+    include_once 'classes/db.php';
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
