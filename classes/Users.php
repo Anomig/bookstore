@@ -1,5 +1,5 @@
 <?php
-    include_once(__DIR__ . "/db.php");
+    include_once(__DIR__ . "/Db.php");
 
     Class User{
         private $fname;

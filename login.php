@@ -1,5 +1,5 @@
 <?php  
-	include_once(__DIR__ . "bookstore/classes/db.php");
+	include_once(__DIR__ . "bookstore/classes/Db.php");
 	include_once(__DIR__ . "bookstore/classes/Users.php");
 
     function Login($email, $password){
@@ -11,20 +11,18 @@
     }
 
     if(!empty($_POST)){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $result = Login($email, $password);
-        if(Login($email, $password)){
-            session_start();
-            $_SESSION['login'] = true;
-            $_SESSION['email'] = $email;
-            header('Location: index.php');
-        }else{
-            $error = true;
-        }
-    }
-
+		if(Login($_POST['email'], $_POST['password'])){
+			session_start();
+			$_SESSION['login'] = true;
+			header('Location: index.php');
+		}else{
+			$error = "Sorry, we can't log you in with that email address and password. Can you try again?";
+		}
+	}
+	// if(User::canLogin($email, $password)){
+	// 	$_SESSION['login'] = true;
+	// 	header('Location: index.php');
+    // }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

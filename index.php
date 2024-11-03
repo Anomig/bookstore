@@ -1,6 +1,6 @@
 <?php 
     include_once 'classes/Users.php';
-    include_once 'classes/db.php';
+    include_once 'classes/Db.php';
 
     session_start();
     if($_SESSION['login'] !== true){                                        // als de persoon niet is ingelogd, ga naar login.php    

@@ -1,5 +1,5 @@
 <?php  
-	include_once(__DIR__ . "bookstore/classes/db.php");
+	include_once(__DIR__ . "bookstore/classes/Db.php");
 	include_once(__DIR__ . "bookstore/classes/Users.php");
 
     if(!empty($_POST)){
@@ -42,11 +42,11 @@
                 
                 <div class="form_field">
 					<label for="fname">First name</label>
-					<input type="text" name="email">
+					<input type="text" name="fname">
 				</div>
                 <div class="form_field">
 					<label for="lname">Last name</label>
-					<input type="text" name="email">
+					<input type="text" name="">
 				</div>
 				<div class="form_field">
 					<label for="Email">Email</label>
@@ -58,6 +58,7 @@
 				</div>
 
 				<div class="form__field">
+                    <button value="sign in" class="btn btn_primary">Sign in</button>
 					<input type="submit" value="Sign in" class="btn btn_primary">	
 					<input type="checkbox" id="rememberMe"><label for="rememberMe" class="label_inline">Remember me</label>
 				</div>
