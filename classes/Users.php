@@ -59,16 +59,17 @@
             if(empty($password)){
                 throw new Exception("Password can't be empty");
             }
-            $this->password = $password;
+            $this->password = password_hash($password, PASSWORD_DEFAULT);
             return $this;
         }
 
         public function save(){
             $conn = db::getConnection();
-            $stmt = $conn->prepare("INSERT INTO users (fname, lname, email) VALUES (:fname, :lname, :email)");
+            $stmt = $conn->prepare("INSERT INTO users (fname, lname, email, password) VALUES (:fname, :lname, :email, :password)");
             $stmt->bindValue(":fname", $this->fname);
             $stmt->bindValue(":lname", $this->lname);
             $stmt->bindValue(":email", $this->email);
+            $stmt->bindValue(":password", $this->password);
             return $stmt->execute();
         }
 
