@@ -58,8 +58,7 @@
 				</div>
 
 				<div class="form__field">
-                    <button value="sign in" class="btn btn_primary">Sign in</button>
-					<input type="submit" value="Sign in" class="btn btn_primary">	
+                    <button value="sign in" class="btn btn_primary">Sign in</button>	
 					<input type="checkbox" id="rememberMe"><label for="rememberMe" class="label_inline">Remember me</label>
 				</div>
 
