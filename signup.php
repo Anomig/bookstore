@@ -1,6 +1,6 @@
 <?php  
-	include_once(__DIR__ . "bookstore/classes/Db.php");
-	include_once(__DIR__ . "bookstore/classes/Users.php");
+	include_once(__DIR__ . "/classes/Db.php");
+	include_once(__DIR__ . "/classes/Users.php");
 
     if(!empty($_POST)){
         try{
@@ -9,12 +9,18 @@
             $user->setLname($_POST['lname']);
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
-            $user->save();
+
+            if($user->save()){
+				header('Location: login.php');
+			} else{
+				echo "user not saved";
+			}
         }
     catch(Exception $e){
         $error = $e->getMessage();
     }
     }
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -46,7 +52,7 @@
 				</div>
                 <div class="form_field">
 					<label for="lname">Last name</label>
-					<input type="text" name="">
+					<input type="text" name="lname">
 				</div>
 				<div class="form_field">
 					<label for="Email">Email</label>
