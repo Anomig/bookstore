@@ -2,18 +2,18 @@
     include_once 'classes/Users.php';
     include_once 'classes/Db.php';
 
-    try{
-            $conn = Db:: getConnection();
-            echo "Connected to the database 🎉";
-        } catch(PDOException $ex){
-            echo "Not connected to the database 🙈" . $ex->getMessage();
-        }
+    // try{
+    //         $conn = Db:: getConnection();
+    //         echo "Connected to the database 🎉";
+    //     } catch(PDOException $ex){
+    //         echo "Not connected to the database 🙈" . $ex->getMessage();
+    //     }
 
     session_start();
     if($_SESSION['login'] !== true){                                        // als de persoon niet is ingelogd, ga naar login.php    
         header('Location: login.php');
     }
-    
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
