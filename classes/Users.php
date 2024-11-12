@@ -6,6 +6,7 @@
         private $lname;
         private $email;
         private $password;
+        private $role;
 
         public function getFname()
         {
@@ -63,6 +64,18 @@
             return $this;
         }
 
+        public function getRole()
+        {
+                return $this->role;
+        }
+
+        public function setRole($role)
+        {
+                $this->role = $role;
+
+                return $this;
+        }
+
         public function save(){
             $conn = db::getConnection();
             $stmt = $conn->prepare("INSERT INTO users (fname, lname, email, password) VALUES (:fname, :lname, :email, :password)");
@@ -73,13 +86,10 @@
             return $stmt->execute();
         }
 
-        public static function canLogin(
-            $email,
-            $password
-        ){
+        public static function canLogin($email,$password){
             $conn = db::getConnection();
             $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
-            $stmt->bindValue(":email", $email);
+            $stmt->bindValue(":email", $email, PDO::PARAM_STR);
             $stmt->execute();
             $user = $stmt->fetch();
             if($user === false){
@@ -88,6 +98,13 @@
             if(password_verify($password, $user['password'])){
                 return true;
             }
-            return false;
+        }
+
+        public function getUserByEmail($email){
+            $conn = db::getConnection();
+            $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
     }

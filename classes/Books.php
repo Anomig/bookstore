@@ -102,20 +102,23 @@
         }
     
         // Functie om een boek toe te voegen
-        public function create() {
+        public function addBook() {
             $query = "INSERT INTO " . $this->table . " (title, author, description, price, image_url, type, category_id) 
-                      VALUES (?, ?, ?, ?, ?, ?, ?)";
-    
+                      VALUES (:title, :author, :description, :price, :image_url, :type, :category_id)";
+                      
             $stmt = $this->conn->prepare($query);
-    
+            
             // Bind de waarden aan de statement
-            $stmt->bind_param("ssssssi", $this->title, $this->author, $this->description, $this->price, $this->image_url, $this->type, $this->category_id);
+            $stmt->bindValue(':title', $this->title);
+            $stmt->bindValue(':author', $this->author);
+            $stmt->bindValue(':description', $this->description);
+            $stmt->bindValue(':price', $this->price);
+            $stmt->bindValue(':image_url', $this->image_url);
+            $stmt->bindValue(':type', $this->type);
+            $stmt->bindValue(':category_id', $this->category_id);
     
-            if ($stmt->execute()) {
-                return true;
-            }
-    
-            return false;
+            // Voer het statement uit
+            return $stmt->execute();
         }
     }
     
