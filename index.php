@@ -1,8 +1,10 @@
 <?php 
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
     include_once './classes/Users.php';
     include_once './classes/Books.php';
+    include_once './classes/Category.php';
     include_once './classes/Db.php';
 
     session_start();
@@ -12,9 +14,19 @@ error_reporting(E_ALL);
 
     $db = Db::getConnection();
 
-    $book = new Book($db);
-    $stmt = $book->read();
-    $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Instantieer de classes
+$book = new Book($db);
+$category = new Category($db);
+
+// Haal categorieën op
+$categories = $category->getAllCategories(); // Dit geeft een array
+
+// Haal boeken op, eventueel gefilterd op categorie
+$filter_category = isset($_GET['category_id']) ? $_GET['category_id'] : null;
+$books = $book->read($filter_category); // Pas je `getAllBooks` methode aan om filters te ondersteunen
+
+    
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -26,6 +38,18 @@ error_reporting(E_ALL);
 </head>
 <body>
     <h1>Welcome to the shop!</h1>
+
+    <form method="GET" action="index.php">
+    <select name="category_id">
+        <option value="">Alle Categorieën</option>
+        <?php foreach ($categories as $cat): ?>
+            <option value="<?= $cat['id']; ?>" <?= isset($filter_category) && $filter_category == $cat['id'] ? 'selected' : ''; ?>>
+                <?= $cat['name']; ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <input type="submit" value="Filteren">
+    </form>
 
     <div class="container">
         <div class="product-grid">
