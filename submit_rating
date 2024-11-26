@@ -1,0 +1,27 @@
+<?php
+require_once("../bootstrap.php");
+
+if (!empty($_POST)) {
+    $product_id = $_POST['product_id'];
+    $user_id = $_POST['user_id'];
+    $rating = $_POST['rating'];
+
+    // Rating tussen 1 en 5
+    if ($rating >= 1 && $rating <= 5) {
+        $db = Db::getConnection();
+        $stmt = $db->prepare("INSERT INTO ratings (user_id, product_id, rating) VALUES (:user_id, :product_id, :rating)");
+        $stmt->execute([
+            'user_id' => $user_id,
+            'product_id' => $product_id,
+            'rating' => $rating
+        ]);
+
+        // JSON respons terugsturen
+        echo json_encode(['status' => 'success', 'message' => 'Beoordeling is toegevoegd!']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Beoordeling moet tussen 1 en 5 liggen.']);
+    }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Er ging iets mis. Probeer het opnieuw.']);
+}
+?>
