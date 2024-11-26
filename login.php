@@ -5,8 +5,6 @@ error_reporting(E_ALL);
 session_start(); 
 
 include_once(__DIR__ . "/classes/Db.php");
-var_dump(__DIR__); // Check the current directory
-var_dump(file_exists(__DIR__ . '/classes/Db.php')); // Check if the Db.php file exists at this path
 include_once(__DIR__ . "/classes/Users.php");
 
 if(!empty($_POST)){
