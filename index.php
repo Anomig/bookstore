@@ -36,6 +36,7 @@ if ($category_filter) {
 }
 
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$books = $book->read($filter_category); // Pas je `getAllBooks` methode aan om filters te ondersteunen
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +52,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <select name="category_id">
         <option value="">Alle Categorieën</option>
         <?php foreach ($categories as $cat): ?>
-            <option value="<?= $cat['id']; ?>" <?= isset($category_filter) && $category_filter == $cat['id'] ? 'selected' : ''; ?>>
+            <option value="<?= $cat['id']; ?>" <?= isset($filter_category) && $filter_category == $cat['id'] ? 'selected' : ''; ?>>
                 <?= $cat['name']; ?>
             </option>
         <?php endforeach; ?>
