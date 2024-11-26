@@ -2,36 +2,38 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-    session_start(); 
+session_start(); 
 
-	include_once(__DIR__ . "/classes/Db.php");
-	include_once(__DIR__ . "/classes/Users.php");
+include_once(__DIR__ . "/classes/Db.php");
+var_dump(__DIR__); // Check the current directory
+var_dump(file_exists(__DIR__ . '/classes/Db.php')); // Check if the Db.php file exists at this path
+include_once(__DIR__ . "/classes/Users.php");
 
-    if(!empty($_POST)){
-		$email = $_POST['email'];
-		$password = $_POST['password'];
+if(!empty($_POST)){
+	$email = $_POST['email'];
+	$password = $_POST['password'];
 	
-		if(User::canLogin($email, $password)){
+	if(User::canLogin($email, $password)){
 	
-			$user = new User();
-			$userData = $user->getUserByEmail($email);
+		$user = new User();
+		$userData = $user->getUserByEmail($email);
 	
-			$_SESSION['login'] = true;
-			$_SESSION['role'] = $userData['role'];  // Role wordt hier ingesteld.
+		$_SESSION['login'] = true;
+		$_SESSION['role'] = $userData['role'];  // Role wordt hier ingesteld.
 			
-			if($userData['role'] == 'admin'){
-				header('Location: admin_dashboard.php');
-				exit();
-			} else {
-				header('Location: index.php');
-				exit();
-			}
+		if($userData['role'] == 'admin'){
+			header('Location: admin_dashboard.php');
 			exit();
 		} else {
-			$error = true;
-			echo "Incorrect login details.";
+			header('Location: index.php');
+			exit();
 		}
+		exit();
+	} else {
+		$error = true;
+		echo "Incorrect login details.";
 	}
+}
 	
 ?>
 <!DOCTYPE html>
