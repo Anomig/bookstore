@@ -1,11 +1,15 @@
 <?php
 session_start(); 
 
+// Controleer of de gebruiker is ingelogd als admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     // Als de gebruiker niet ingelogd is of geen admin is, doorsturen naar loginpagina
     header('Location: login.php');
     exit();
 }
+
+// Haal de naam van de ingelogde admin op voor gepersonaliseerd welkomstbericht
+$admin_name = isset($_SESSION['fname']) ? $_SESSION['fname'] : 'Admin';
 ?>
 
 <!DOCTYPE html>
@@ -18,16 +22,19 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 </head>
 <body>
     <h1>Admin Dashboard</h1>
+    
     <nav>
         <ul>
+            <li><a href="admin_dashboard.php" class="active">Dashboard</a></li>
             <li><a href="add_book.php">Add Book</a></li>
             <li><a href="manage_products.php">Manage Products</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="logout.php" class="logout-btn">Logout</a></li>
         </ul>
     </nav>
+
     <div class="content">
-        <h2>Welcome, Admin!</h2>
-        <p>Here you can manage your products.</p>
+        <h2>Welcome, <?php echo htmlspecialchars($admin_name); ?>!</h2>
+        <p class="welcome-message">Here you can manage your products, view orders, and more.</p>
     </div>
 </body>
 </html>

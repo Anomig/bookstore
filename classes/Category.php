@@ -9,6 +9,10 @@ class Category {
 
     // Voeg een nieuwe categorie toe
     public function addCategory($name, $description) {
+        if (empty($name) || empty($description)) {
+            throw new Exception("Name and description cannot be empty.");
+        }
+
         $sql = "INSERT INTO " . $this->table . " (name, description) VALUES (:name, :description)";
         $stmt = $this->db->prepare($sql);
 
@@ -17,7 +21,7 @@ class Category {
         $stmt->bindParam(':description', $description);
 
         // Voer de query uit
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             return true;
         }
         return false;

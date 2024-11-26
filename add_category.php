@@ -6,8 +6,8 @@ $db = Db::getConnection();
 $category = new Category($db);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
+    $name = htmlspecialchars(trim($_POST['name']));
+    $description = htmlspecialchars(trim($_POST['description']));
 
     if ($category->addCategory($name, $description)) {
         echo "Categorie toegevoegd!";
@@ -18,7 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <form action="add_category.php" method="POST">
-    <input type="text" name="name" placeholder="Categorie naam" required>
-    <textarea name="description" placeholder="Beschrijving van de categorie" required></textarea>
+    <label>Category Name:</label>
+    <input type="text" name="name" placeholder="Categorie naam" required><br>
+
+    <label>Description:</label>
+    <textarea name="description" placeholder="Beschrijving van de categorie" required></textarea><br>
+
     <input type="submit" value="Categorie toevoegen">
 </form>

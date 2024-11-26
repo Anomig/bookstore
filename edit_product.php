@@ -31,25 +31,28 @@ if (isset($_GET['id'])) {
 
 // Update het product
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $book->id = $_POST['id'];
-    $book->title = $_POST['title'];
-    $book->author = $_POST['author'];
-    $book->description = $_POST['description'];
-    $book->price = $_POST['price'];
-    $book->image_url = $_POST['image_url'];
-    $book->type = $_POST['type'];
-    $book->category_id = $_POST['category_id'];
-
-    // Update de gegevens
-    if ($book->update()) {
-        echo "Product bijgewerkt!";
+    // Validatie van de invoer
+    if (!is_numeric($_POST['price']) || $_POST['price'] <= 0) {
+        echo "De prijs moet een positief getal zijn.";
     } else {
-        echo "Er is een fout opgetreden.";
+        $book->id = $_POST['id'];
+        $book->title = $_POST['title'];
+        $book->author = $_POST['author'];
+        $book->description = $_POST['description'];
+        $book->price = $_POST['price'];
+        $book->image_url = $_POST['image_url'];
+        $book->type = $_POST['type'];
+        $book->category_id = $_POST['category_id'];
+
+        // Update de gegevens
+        if ($book->update()) {
+            echo "Product succesvol bijgewerkt!";
+        } else {
+            echo "Er is een fout opgetreden bij het bijwerken van het product.";
+        }
     }
 }
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

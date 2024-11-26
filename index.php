@@ -25,11 +25,7 @@ $categories = $category->getAllCategories(); // Dit geeft een array
 
 // Haal boeken op, eventueel gefilterd op categorie
 $filter_category = isset($_GET['category_id']) ? $_GET['category_id'] : null;
-$books = $book->read($filter_category); // Pas je `getAllBooks` methode aan om filters te ondersteunen
-
-    
-
-
+$books = $book->read($filter_category); // Pas je `getAllBooks` methode aan om filters te ondersteunen  
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
