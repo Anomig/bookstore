@@ -16,16 +16,24 @@ include_once(__DIR__ . "/classes/Category.php");
 
 $db = Db::getConnection();
 
-    // Instantieer de classes
+// Instantieer de classes
 $book = new Book($db);
 $category = new Category($db);
 
 // Haal categorieën op
-$categories = $category->getAllCategories(); // Dit geeft een array
+$categories_stmt = $db->query("SELECT id, name FROM categories");
+$categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Haal boeken op, eventueel gefilterd op categorie
-$filter_category = isset($_GET['category_id']) ? $_GET['category_id'] : null;
-$books = $book->read($filter_category); // Pas je `getAllBooks` methode aan om filters te ondersteunen  
+// Haal de producten op die behoren tot de geselecteerde categorie (indien geselecteerd)
+if ($category_filter) {
+    $stmt = $db->prepare("SELECT * FROM products WHERE category_id = :category_id");
+    $stmt->execute(['category_id' => $category_filter]);
+} else {
+    // Haal alle producten op als er geen categorie is geselecteerd
+    $stmt = $db->query("SELECT * FROM products");
+}
+
+$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
