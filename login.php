@@ -2,35 +2,38 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 session_start(); 
 
 include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__ . "/classes/Users.php");
 
-if(!empty($_POST)){
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	
-	if(User::canLogin($email, $password)){
-	
-		$user = new User();
-		$userData = $user->getUserByEmail($email);
-	
-		$_SESSION['login'] = true;
-		$_SESSION['role'] = $userData['role'];  // Role wordt hier ingesteld.
-			
-		if($userData['role'] == 'admin'){
-			header('Location: admin_dashboard.php');
-			exit();
-		} else {
-			header('Location: index.php');
-			exit();
-		}
-		exit();
-	} else {
-		$error = true;
-		echo "Incorrect login details.";
-	}
+$error = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    // Basic input validation
+    if (empty($email) || empty($password)) {
+        $error = "Please fill in all fields.";
+    } else {
+        if ($user = User::canLogin($email, $password)) {
+            $userInstance = new User();
+            $userData = $userInstance->getUserByEmail($email);
+
+            // Start session and set user data
+            $_SESSION['login'] = true;
+            $_SESSION['role'] = $userData['role'];
+
+            // Redirect based on role
+            $redirect = ($userData['role'] === 'admin') ? 'admin_dashboard.php' : 'index.php';
+            header("Location: $redirect");
+            exit();
+        } else {
+            $error = "Incorrect email or password.";
+        }
+    }
 }
 	
 ?>
@@ -48,11 +51,11 @@ if(!empty($_POST)){
 			<form action="" method="post">
 				<h2 form__title>Login</h2>
 
-				<?php if (isset($error)): ?>
-				<div class="form_error">
-					<p>Sorry, we can't log you in with that email address and password. Can you try again?</p>
-				</div>
-				<?php endif; ?>
+				<?php if ($error): ?>
+                <div class="form_error">
+                    <p><?= htmlspecialchars($error); ?></p>
+                </div>
+            <?php endif; ?>
 
 				<div class="form_field">
 					<label for="Email">Email</label>
