@@ -107,5 +107,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <a href="logout.php">Logout?</a>
+    <a href="cart.php">Cart</a>
 </body>
 </html>
