@@ -3,17 +3,20 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-    include_once(__DIR__ . "/classes/Db.php");
-    include_once(__DIR__ . "/classes/Users.php");
-    include_once(__DIR__ . "/classes/Books.php");
-    include_once(__DIR__ . "/classes/Category.php");
+
+include_once(__DIR__ . "/classes/Db.php");
+include_once(__DIR__ . "/classes/Users.php");
+include_once(__DIR__ . "/classes/Books.php");
+include_once(__DIR__ . "/classes/Category.php");
+var_dump(__DIR__);
+var_dump(file_exists(__DIR__ . "/classes/Db.php"));
 
     
-    if($_SESSION['login'] !== true){                                        // als de persoon niet is ingelogd, ga naar login.php    
-        header('Location: login.php');
-    }
+if($_SESSION['login'] !== true){                                        // als de persoon niet is ingelogd, ga naar login.php    
+    header('Location: login.php');
+}
 
-    $db = Db::getConnection();
+$db = Db::getConnection();
 
     // Instantieer de classes
 $book = new Book($db);
