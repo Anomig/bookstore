@@ -24,6 +24,8 @@ $category = new Category($db);
 $categories_stmt = $db->query("SELECT id, name FROM categories");
 $categories = $categories_stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$category_filter = isset($_GET['category']) ? $_GET['category'] : ''; // Zorg ervoor dat category_filter altijd gedefinieerd is
+
 // Haal de producten op die behoren tot de geselecteerde categorie (indien geselecteerd)
 if ($category_filter) {
     $stmt = $db->prepare("SELECT * FROM products WHERE category_id = :category_id");
