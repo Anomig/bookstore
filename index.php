@@ -52,7 +52,7 @@ $books = $book->read($filter_category); // Pas je `getAllBooks` methode aan om f
     <select name="category_id">
         <option value="">Alle Categorieën</option>
         <?php foreach ($categories as $cat): ?>
-            <option value="<?= $cat['id']; ?>" <?= isset($filter_category) && $filter_category == $cat['id'] ? 'selected' : ''; ?>>
+            <option value="<?= $cat['id']; ?>" <?= isset($category_filter) && $category_filter == $cat['id'] ? 'selected' : ''; ?>>
                 <?= $cat['name']; ?>
             </option>
         <?php endforeach; ?>
