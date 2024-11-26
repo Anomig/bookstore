@@ -13,8 +13,6 @@ include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__ . "/classes/Users.php");
 include_once(__DIR__ . "/classes/Books.php");
 include_once(__DIR__ . "/classes/Category.php");
-var_dump(__DIR__);
-var_dump(file_exists(__DIR__ . "/classes/Db.php"));
 
 $db = Db::getConnection();
 
