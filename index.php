@@ -36,8 +36,9 @@ if ($category_filter) {
 }
 
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$books = $book->read($category_filter); // Pas je `getAllBooks` methode aan om filters te ondersteunen
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,33 +49,39 @@ $books = $book->read($category_filter); // Pas je `getAllBooks` methode aan om f
 <body>
     <h1>Welcome to the shop!</h1>
 
+    <!-- Filter formulier voor categorie -->
     <form method="GET" action="index.php">
-    <select name="category_id">
-        <option value="">Alle Categorieën</option>
-        <?php foreach ($categories as $cat): ?>
-            <option value="<?= $cat['id']; ?>" <?= isset($category_filter) && $category_filter == $cat['id'] ? 'selected' : ''; ?>>
-                <?= $cat['name']; ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-    <input type="submit" value="Filteren">
+        <select name="category" id="category">
+            <option value="">Alle Categorieën</option>
+            <?php foreach ($categories as $cat): ?>
+                <option value="<?= $cat['id']; ?>" <?= isset($category_filter) && $category_filter == $cat['id'] ? 'selected' : ''; ?>>
+                    <?= $cat['name']; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        <input type="submit" value="Filteren">
     </form>
 
     <div class="container">
         <div class="product-grid">
-            <?php foreach ($books as $product): ?>
-                <div class="product">
-                    <img src="<?$product['image_url']; ?>" alt="<?=$product['title']; ?>">
-                    <div class="product-info">
-                        <h3><?= $product['title']; ?></h3>
-                        <p><?= $product['author']; ?></p>
-                        <p class="price"><?$product['price'];?>€</p>
-                        <a href="add_to_cart.php?id=<?= $product['id'];?>" class="btn-add-to-cart">Add to cart</a>
+            <?php if (count($products) > 0): ?>
+                <?php foreach ($products as $product): ?>
+                    <div class="product">
+                        <img src="<?= $product['image_url']; ?>" alt="<?= $product['title']; ?>">
+                        <div class="product-info">
+                            <h3><?= $product['title']; ?></h3>
+                            <p><?= $product['author']; ?></p>
+                            <p class="price"><?= $product['price']; ?>€</p>
+                            <a href="add_to_cart.php?id=<?= $product['id'];?>" class="btn-add-to-cart">Add to cart</a>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Geen producten gevonden voor deze categorie.</p>
+            <?php endif; ?>
         </div>
     </div>
+
     <a href="logout.php">logout?</a>
 </body>
 </html>
