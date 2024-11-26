@@ -1,5 +1,6 @@
 <?php
     include_once(__DIR__ . "/Db.php");
+    var_dump(__DIR__ . "/Db.php");
 
     Class User{
         private $fname;
