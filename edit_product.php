@@ -35,14 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!is_numeric($_POST['price']) || $_POST['price'] <= 0) {
         echo "De prijs moet een positief getal zijn.";
     } else {
-        $book->id = $_POST['id'];
-        $book->title = $_POST['title'];
-        $book->author = $_POST['author'];
-        $book->description = $_POST['description'];
-        $book->price = $_POST['price'];
-        $book->image_url = $_POST['image_url'];
-        $book->type = $_POST['type'];
-        $book->category_id = $_POST['category_id'];
+        // Gebruik de setters om de waarden in het Book-object in te stellen
+        $book->setId($_POST['id']);
+        $book->setTitle($_POST['title']);
+        $book->setAuthor($_POST['author']);
+        $book->setDescription($_POST['description']);
+        $book->setPrice($_POST['price']);
+        $book->setImageUrl($_POST['image_url']);
+        $book->setType($_POST['type']);
+        $book->setCategoryId($_POST['category_id']);
 
         // Update de gegevens
         if ($book->update()) {
@@ -52,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,44 +65,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h1>Bewerk product</h1>
 
     <form method="POST">
-        <input type="hidden" name="id" value="<?= $product['id']; ?>">
+    <input type="hidden" name="id" value="<?= $product['id']; ?>">
 
-        <label for="title">Titel:</label>
-        <input type="text" name="title" id="title" value="<?= $product['title']; ?>" required><br>
+    <label for="title">Titel:</label>
+    <input type="text" name="title" id="title" value="<?= $product['title']; ?>" required><br>
 
-        <label for="author">Auteur:</label>
-        <input type="text" name="author" id="author" value="<?= $product['author']; ?>" required><br>
+    <label for="author">Auteur:</label>
+    <input type="text" name="author" id="author" value="<?= $product['author']; ?>" required><br>
 
-        <label for="description">Beschrijving:</label>
-        <textarea name="description" id="description" required><?= $product['description']; ?></textarea><br>
+    <label for="description">Beschrijving:</label>
+    <textarea name="description" id="description" required><?= $product['description']; ?></textarea><br>
 
-        <label for="price">Prijs:</label>
-        <input type="number" name="price" id="price" value="<?= $product['price']; ?>" required><br>
+    <label for="price">Prijs:</label>
+    <input type="number" name="price" id="price" value="<?= $product['price']; ?>" required><br>
 
-        <label for="image_url">Afbeelding URL:</label>
-        <input type="text" name="image_url" id="image_url" value="<?= $product['image_url']; ?>" required><br>
+    <label for="image_url">Afbeelding URL:</label>
+    <input type="text" name="image_url" id="image_url" value="<?= $product['image_url']; ?>" required><br>
 
-        <label for="type">Type:</label>
-        <select name="type" id="type" required>
-            <option value="fysiek boek" <?= $product['type'] == 'fysiek boek' ? 'selected' : ''; ?>>Fysiek boek</option>
-            <option value="ebook" <?= $product['type'] == 'ebook' ? 'selected' : ''; ?>>E-book</option>
-            <option value="audioboek" <?= $product['type'] == 'audioboek' ? 'selected' : ''; ?>>Audioboek</option>
-        </select><br>
+    <label for="type">Type:</label>
+    <select name="type" id="type" required>
+        <option value="fysiek boek" <?= $product['type'] == 'fysiek boek' ? 'selected' : ''; ?>>Fysiek boek</option>
+        <option value="ebook" <?= $product['type'] == 'ebook' ? 'selected' : ''; ?>>E-book</option>
+        <option value="audioboek" <?= $product['type'] == 'audioboek' ? 'selected' : ''; ?>>Audioboek</option>
+    </select><br>
 
-        <label for="category_id">Categorie:</label>
-        <select name="category_id" id="category_id" required>
-            <?php 
-            // Haal de categorieën op
-            $stmt = $db->query("SELECT id, name FROM categories");
-            $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($categories as $category): ?>
-                <option value="<?= $category['id']; ?>" <?= $category['id'] == $product['category_id'] ? 'selected' : ''; ?>>
-                    <?= $category['name']; ?>
-                </option>
-            <?php endforeach; ?>
-        </select><br>
+    <label for="category_id">Categorie:</label>
+    <select name="category_id" id="category_id" required>
+        <?php 
+        // Haal de categorieën op
+        $stmt = $db->query("SELECT id, name FROM categories");
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($categories as $category): ?>
+            <option value="<?= $category['id']; ?>" <?= $category['id'] == $product['category_id'] ? 'selected' : ''; ?>>
+                <?= $category['name']; ?>
+            </option>
+        <?php endforeach; ?>
+    </select><br>
 
-        <button type="submit">Werk product bij</button>
-    </form>
+    <button type="submit">Werk product bij</button>
+</form>
+
 </body>
 </html>

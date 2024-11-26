@@ -139,7 +139,27 @@ class Book {
         // Voer het statement uit
         return $stmt->execute();
     }
-
+    
+    public function update() {
+        $query = "UPDATE " . $this->table . " 
+                  SET title = :title, author = :author, description = :description, 
+                      price = :price, image_url = :image_url, type = :type, category_id = :category_id
+                  WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind de waarden aan de statement
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':title', $this->title);
+        $stmt->bindParam(':author', $this->author);
+        $stmt->bindParam(':description', $this->description);
+        $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':image_url', $this->image_url);
+        $stmt->bindParam(':type', $this->type);
+        $stmt->bindParam(':category_id', $this->category_id);
+        
+        return $stmt->execute(); // Voer de query uit en geef het resultaat terug
+    }
+    
     // Functie om een boek te verwijderen (alleen admin)
     public function deleteBook() {
         $query = "DELETE FROM " . $this->table . " WHERE id = :id";
