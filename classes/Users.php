@@ -77,7 +77,7 @@
         }
 
         public function save(){
-            $conn = db::getConnection();
+            $conn = Db::getConnection();
             $stmt = $conn->prepare("INSERT INTO users (fname, lname, email, password) VALUES (:fname, :lname, :email, :password)");
             $stmt->bindValue(":fname", $this->fname);
             $stmt->bindValue(":lname", $this->lname);
@@ -87,7 +87,7 @@
         }
 
         public static function canLogin($email,$password){
-            $conn = db::getConnection();
+            $conn = Db::getConnection();
             $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
             $stmt->bindValue(":email", $email, PDO::PARAM_STR);
             $stmt->execute();
@@ -101,7 +101,7 @@
         }
 
         public function getUserByEmail($email){
-            $conn = db::getConnection();
+            $conn = Db::getConnection();
             $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
             $stmt->bindValue(":email", $email, PDO::PARAM_STR);
             $stmt->execute();
