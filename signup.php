@@ -1,27 +1,36 @@
-<?php  
-	include_once(__DIR__ . "/classes/Db.php");
-	include_once(__DIR__ . "/classes/Users.php");
+<?php
+include_once(__DIR__ . "/classes/Db.php");
+include_once(__DIR__ . "/classes/Users.php");
 
-    if(!empty($_POST)){
-        try{
-            $user = new User();
-            $user->setFname($_POST['fname']);
-            $user->setLname($_POST['lname']);
-            $user->setEmail($_POST['email']);
-            $user->setPassword($_POST['password']);
+$error = '';
 
-            if($user->save()){
-				header('Location: login.php');
-			} else{
-				echo "user not saved";
-			}
+if (!empty($_POST)) {
+    try {
+        // Maak een nieuw User-object
+        $user = new User();
+        
+        // Stel de gebruikersgegevens in
+        $user->setFname($_POST['fname']);
+        $user->setLname($_POST['lname']);
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+
+        // Sla de gebruiker op in de database
+        if ($user->save()) {
+            header('Location: login.php');
+            exit(); // Zorg ervoor dat de uitvoering stopt na de header
+        } else {
+            $error = 'User not saved. Please try again.';
         }
-    catch(Exception $e){
+    } catch (Exception $e) {
+        // Toon specifieke foutmelding als er iets misgaat
         $error = $e->getMessage();
     }
-    }
+}
 
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,47 +40,45 @@
 </head>
 <body>
 <div class="Login">
-		<div class="form_login">
-			<form action="" method="post">
-				<h2 form__title>Sign In</h2>
+    <div class="form_login">
+        <form action="" method="post">
+            <h2 class="form__title">Sign Up</h2>
 
-				<?php if(isset($error)): ?>
+            <?php if ($error): ?>
+                <div class="form_error">
+                    <p><?php echo htmlspecialchars($error); ?></p>
+                </div>
+            <?php endif; ?>
 
-				<div class="form_error">
-					<p>
-						Sorry, we can't sign you in. Can you try again?
-					</p>
-				</div>
-				<?php endif; ?>
-                
-                
-                <div class="form_field">
-					<label for="fname">First name</label>
-					<input type="text" name="fname">
-				</div>
-                <div class="form_field">
-					<label for="lname">Last name</label>
-					<input type="text" name="lname">
-				</div>
-				<div class="form_field">
-					<label for="Email">Email</label>
-					<input type="text" name="email">
-				</div>
-				<div class="form_field">
-					<label for="Password">Password</label>
-					<input type="password" name="password">
-				</div>
+            <div class="form_field">
+                <label for="fname">First Name</label>
+                <input type="text" name="fname" required>
+            </div>
+            
+            <div class="form_field">
+                <label for="lname">Last Name</label>
+                <input type="text" name="lname" required>
+            </div>
 
-				<div class="form__field">
-                    <button value="sign in" class="btn btn_primary">Sign in</button>	
-					<input type="checkbox" id="rememberMe"><label for="rememberMe" class="label_inline">Remember me</label>
-				</div>
+            <div class="form_field">
+                <label for="email">Email</label>
+                <input type="email" name="email" required>
+            </div>
 
-                <div class="form_field">
-					<a href="./login.php">Al een account?</a>
-				</div>
-			</form>
-		</div>
-	</div>
+            <div class="form_field">
+                <label for="password">Password</label>
+                <input type="password" name="password" required minlength="6">
+            </div>
+
+            <div class="form_field">
+                <button type="submit" class="btn btn_primary">Sign Up</button>
+            </div>
+
+            <div class="form_field">
+                <a href="login.php">Already have an account? Log in</a>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
