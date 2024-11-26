@@ -36,7 +36,7 @@ if ($category_filter) {
 }
 
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$books = $book->read($filter_category); // Pas je `getAllBooks` methode aan om filters te ondersteunen
+$books = $book->read($category_filter); // Pas je `getAllBooks` methode aan om filters te ondersteunen
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
