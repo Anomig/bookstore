@@ -67,7 +67,7 @@ if (!empty($_POST)) {
 
             <div class="form_field">
                 <label for="password">Password</label>
-                <input type="password" name="password" required minlength="6">
+                <input type="password" name="password" required minlength="4">
             </div>
 
             <div class="form_field">
