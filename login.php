@@ -36,8 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 	
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -68,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 				<div class="form_field">
 					<input type="submit" value="Sign in" class="btn btn_primary">	
-					<input type="checkbox" id="rememberMe"><label for="rememberMe" class="label_inline">Remember me</label>
+					<!-- <input type="checkbox" id="rememberMe"><label for="rememberMe" class="label_inline">Remember me</label> -->
 				</div>
 
 				<div class="form_field">

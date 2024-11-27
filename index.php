@@ -47,7 +47,7 @@ $search_term = isset($_GET['search']) ? $_GET['search'] : '';
 $category_filter = isset($_GET['category']) ? $_GET['category'] : ''; 
 
 // Haal de producten op die voldoen aan de zoekterm en de categorie (indien geselecteerd)
-$query = "SELECT * FROM products WHERE title LIKE :search OR description LIKE :search";
+$query = "SELECT * FROM products WHERE (title LIKE :search OR description LIKE :search)";
 $params = ['search' => '%' . $search_term . '%'];
 
 if ($category_filter) {
