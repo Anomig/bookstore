@@ -1,7 +1,7 @@
 <?php
 class Book {
     private $conn;
-    private $table = "products";  // Je database tabelnaam
+    private $table = "products";
 
     // Boeken eigenschappen (privé)
     private $id;

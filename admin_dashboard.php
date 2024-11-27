@@ -17,12 +17,10 @@ $admin_name = isset($_SESSION['fname']) ? $_SESSION['fname'] : 'Admin';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="css/home.css">
+    <title>Admin dashboard</title>
+    <link rel="stylesheet" href="css/home.css?v=<?= time(); ?>">
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
-    
     <nav>
         <ul>
             <li><a href="admin_dashboard.php" class="active">Dashboard</a></li>
