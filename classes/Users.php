@@ -36,7 +36,7 @@ class User
     public function getPassword() { return $this->password; }
     public function setPassword($password) {
         if (empty($password)) throw new Exception("Password can't be empty.");
-        if (strlen($password) < 6) throw new Exception("Password must be at least 6 characters long.");
+        if (strlen($password) < 4) throw new Exception("Password must be at least 4 characters long.");
         $this->password = password_hash($password, PASSWORD_DEFAULT);
         return $this;
     }
