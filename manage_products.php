@@ -19,11 +19,30 @@ $books = $book->read(); // Haal alle boeken op
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
     <title>Manage Products</title>
 </head>
 <body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="admin_dashboard.php" >Dashboard</a></li>
+                    <li><a href="add_book.php" >Add Book</a></li>
+                    <li><a href="manage_products.php" class="active">Manage Products</a></li>
+                    <li><a href="logout.php" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <h1>Manage Products</h1>
 
+    <div class="content">
     <?php if (count($books) > 0): ?>
         <table>
             <thead>
@@ -51,5 +70,6 @@ $books = $book->read(); // Haal alle boeken op
     <?php else: ?>
         <p>No products found.</p>
     <?php endif; ?>
+</div>
 </body>
 </html>

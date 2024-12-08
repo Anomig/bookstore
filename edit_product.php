@@ -59,9 +59,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
     <title>Edit Product</title>
 </head>
 <body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="admin_dashboard.php" >Dashboard</a></li>
+                    <li><a href="add_book.php" >Add Book</a></li>
+                    <li><a href="manage_products.php" class="active">Manage Products</a></li>
+                    <li><a href="logout.php" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <h1>Bewerk product</h1>
 
     <form method="POST">

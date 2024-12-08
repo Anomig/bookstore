@@ -13,6 +13,12 @@ h1 {
   color: #8b572a; /* Diepere bruine kleur voor titels */
 }
 
+h2 {
+  text-align: center;
+  margin: 20px 0;
+  color: #8b572a;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -178,4 +184,38 @@ input[type="submit"]:hover {
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+/* Als het scherm kleiner is dan 480px (mobiele telefoons) */
+@media (max-width: 480px) {
+  /* Navbar instellingen voor mobiele telefoons */
+  .navbar {
+      padding: 15px;
+  }
+
+  .navbar .logo h1 {
+      font-size: 1.4rem;
+  }
+
+  nav ul {
+      gap: 10px;
+  }
+
+  nav ul li a {
+      font-size: 1.1rem;
+      padding: 6px 12px;
+  }
+
+  /* Hoofdcontent styling */
+  main {
+      padding: 15px;
+  }
+
+  .content h2 {
+      font-size: 1.6rem;
+  }
+
+  .content .welcome-message {
+      font-size: 0.9rem;
+  }
 }

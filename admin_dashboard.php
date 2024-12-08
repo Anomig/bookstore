@@ -17,22 +17,33 @@ $admin_name = isset($_SESSION['fname']) ? $_SESSION['fname'] : 'Admin';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin dashboard</title>
-    <link rel="stylesheet" href="css/home.css?v=<?= time(); ?>">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="admin_dashboard.php" class="active">Dashboard</a></li>
-            <li><a href="add_book.php">Add Book</a></li>
-            <li><a href="manage_products.php">Manage Products</a></li>
-            <li><a href="logout.php" class="logout-btn">Logout</a></li>
-        </ul>
-    </nav>
+    <!-- Navigatiebalk -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="admin_dashboard.php" class="active">Dashboard</a></li>
+                    <li><a href="add_book.php">Add Book</a></li>
+                    <li><a href="manage_products.php">Manage Products</a></li>
+                    <li><a href="logout.php" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <div class="content">
-        <h2>Welcome, <?php echo htmlspecialchars($admin_name); ?>!</h2>
-        <p class="welcome-message">Here you can manage your products, view orders, and more.</p>
-    </div>
+    <!-- Hoofdcontent -->
+    <main>
+        <div class="content">
+            <h2>Welcome, <?php echo htmlspecialchars($admin_name); ?>!</h2>
+            <p class="welcome-message">Here you can manage your products, view orders, and more.</p>
+        </div>
+    </main>
 </body>
 </html>

@@ -1,118 +1,238 @@
-*
-{
-  box-sizing: border-box;
-}
-
-body
-{
-  background-image: url(../images/hans-jurgen-weinhardt-FZ5nx86tP2U-unsplash.jpg); 
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+/* Algemene body styling */
+body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
+  padding: 0;
+  background-color: #f3e9d2; /* Warm beige achtergrondkleur */
+  color: #333;
 }
 
+/* Navigatiebalk */
+header {
+  background-color: #6c4f31; /* Warme bruine kleur voor de header */
+  color: white;
+  padding: 15px 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Zachte schaduw onder de header */
+}
 
-.Login
-{
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr [form] minmax(240px, 450px) 1fr;
-  grid-template-rows: 1fr [form] 1fr 1fr;
-  justify-content: center;
+.navbar {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.form_login
-{
-  background-color: #ffdf88;
-  padding: 1em;
-  color: #505050;
-  grid-column: form;
-  grid-row: form;
+.navbar .logo h1 {
+  font-size: 1.8rem;
 }
 
-.form_error
-{
-  background-color: #999999;
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
   color: white;
-  font-weight: lighter;
-  padding: 0.3em 1em;
-  margin-bottom: 1em;
-  font-size: 0.9em;
-}
-
-.form_field
-{
-  padding-bottom: 1em;
-}
-
-.form_field input[type=text], 
-.form_field input[type=password] 
-{
-  width: 100%;
-  padding: 0.3em;
-  font-size: 1.4em;
-}
-
-.btn
-{
-  width: 100%;
-  margin: 0.5em auto;
-}
-
-.btn_primary
-{
-  background-color: rgb(90, 60, 0);
-  color: white;
-  text-align: center;
-  border: none;
-  padding: 0.3em 2em;
-  font-size: 1.4em;
-}
-
-/* Winkelmandje en afrekenknoppen */
-.cart-summary {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 1.2rem;
-}
-
-.cart-summary .btn-checkout {
-  background-color: #8b572a;
-  color: white;
-  padding: 15px 30px;
   text-decoration: none;
   font-size: 1.1rem;
-  border-radius: 5px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.cart-summary .btn-checkout:hover {
-  background-color: #8b572a;
+nav ul li a.active, nav ul li a:hover {
+  background-color: #ff6600; /* Warme oranje kleur voor actieve en hover links */
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+nav ul li a.logout-btn {
+  background-color: #ff6600;
+  padding: 10px 20px;
+  border-radius: 4px;
 }
 
-.product-info {
-  text-align: center;
+/* Hoofdcontent styling */
+main {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.product img {
-  max-width: 100%;
-  height: auto;
+.content h2 {
+  font-size: 2.2rem;
+  color: #6c4f31;
+  margin-bottom: 15px;
 }
 
+.content .welcome-message {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
 
+/* Styling voor links */
+a {
+  color: #6c4f31; /* Warme bruine kleur */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE STYLING */
+
+/* Als het scherm kleiner is dan 768px (tablet of kleiner) */
 @media (max-width: 768px) {
-  .product-grid {
-      grid-template-columns: 1fr 1fr;
+  /* Navbar instellingen voor kleine schermen */
+  .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+  }
+
+  .navbar .logo h1 {
+      font-size: 1.6rem;
+  }
+
+  nav ul {
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+  }
+
+  nav ul li a {
+      font-size: 1.2rem;
+      padding: 8px 15px;
+  }
+
+  /* Hoofdcontent styling */
+  main {
+      padding: 20px;
+  }
+
+  .content h2 {
+      font-size: 1.8rem;
+  }
+
+  .content .welcome-message {
+      font-size: 1rem;
   }
 }
 
+form{
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+input[type="text"], select {
+  width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #d4a373;
+  border-radius: 4px;
+  background-color: #fff8ec;
+  color: #5a4635;
+}
+
+input[type="submit"] {
+  background-color: #8b572a;
+  color: #fff8ec;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #b56335;
+}
+
+/* Styling voor de tabel */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #ff6600;
+  color: white;
+}
+
+table td a {
+  padding: 8px 12px;
+  margin-right: 10px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+table td .btn-edit {
+  background-color: #6c4f31; /* Warme bruine kleur */
+  color: white;
+}
+
+table td .btn-edit:hover {
+  background-color: #ff6600; /* Warme oranje kleur voor hover */
+}
+
+table td .btn-delete {
+  background-color: #ff3333; /* Rood voor de delete knop */
+  color: white;
+}
+
+table td .btn-delete:hover {
+  background-color: #ff6600;
+}
+
+/* Als het scherm kleiner is dan 480px (mobiele telefoons) */
 @media (max-width: 480px) {
-  .product-grid {
-      grid-template-columns: 1fr;
+  /* Navbar instellingen voor mobiele telefoons */
+  .navbar {
+      padding: 15px;
+  }
+
+  .navbar .logo h1 {
+      font-size: 1.4rem;
+  }
+
+  nav ul {
+      gap: 10px;
+  }
+
+  nav ul li a {
+      font-size: 1.1rem;
+      padding: 6px 12px;
+  }
+
+  /* Hoofdcontent styling */
+  main {
+      padding: 15px;
+  }
+
+  .content h2 {
+      font-size: 1.6rem;
+  }
+
+  .content .welcome-message {
+      font-size: 0.9rem;
   }
 }

@@ -46,9 +46,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
     <title>Add New Book</title>
 </head>
 <body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <h1>Admin Dashboard</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="admin_dashboard.php" >Dashboard</a></li>
+                    <li><a href="add_book.php" class="active">Add Book</a></li>
+                    <li><a href="manage_products.php">Manage Products</a></li>
+                    <li><a href="logout.php" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <h2>Add New Book</h2>
 
     <?php if (isset($error_message)): ?>
@@ -65,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="text" name="author" required><br>
 
         <label>Description:</label>
-        <textarea name="description" required></textarea><br>
+        <input type="text" name="description" required></input><br>
 
         <label>Price:</label>
         <input type="text" name="price" required><br>
