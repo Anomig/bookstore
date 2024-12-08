@@ -120,6 +120,25 @@ class Book {
         }
     }
 
+        // Nieuwe methode om een boek toe te voegen met validatie en sanitatie
+        public function addBookFromPost($postData) {
+            // Valideer en zet de boekgegevens
+            try {
+                $this->setTitle(htmlspecialchars(trim($postData['title'])));
+                $this->setAuthor(htmlspecialchars(trim($postData['author'])));
+                $this->setDescription(htmlspecialchars(trim($postData['description'])));
+                $this->setPrice(floatval($postData['price']));
+                $this->setImageUrl(filter_var($postData['image_url'], FILTER_VALIDATE_URL));
+                $this->setType($postData['type']);
+                $this->setCategoryId(intval($postData['category_id']));
+    
+                // Voeg het boek toe
+                return $this->addBook();  // Voer de methoden van de klasse uit
+            } catch (Exception $e) {
+                return $e->getMessage();  // Geef foutmelding terug als validatie faalt
+            }
+        }
+
     // Functie om een boek toe te voegen
     public function addBook() {
         $query = "INSERT INTO " . $this->table . " (title, author, description, price, image_url, type, category_id) 

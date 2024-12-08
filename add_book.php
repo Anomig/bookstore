@@ -4,6 +4,7 @@ include_once __DIR__ . "/classes/Db.php";
 include_once __DIR__ . "/classes/Books.php";
 include_once __DIR__ . "/classes/Category.php";
 
+// Controleer of de gebruiker een admin is
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     // Redirect niet-admin gebruikers
     header('Location: login.php');
@@ -14,29 +15,20 @@ $db = Db::getConnection();
 $category = new Category($db);
 $categories = $category->getAllCategories(); // Haal alle categorieën op
 
+$error_message = ""; // Variabele voor foutmeldingen
+
+// Verwerk formulier bij POST-aanroep
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Maak boek object
     $book = new Book($db);
 
-    // Zet de boekgegevens via setters met validatie en sanitatie
-    try {
-        $book->setTitle(htmlspecialchars(trim($_POST['title'])));
-        $book->setAuthor(htmlspecialchars(trim($_POST['author'])));
-        $book->setDescription(htmlspecialchars(trim($_POST['description'])));
-        $book->setPrice(floatval($_POST['price']));
-        $book->setImageUrl(filter_var($_POST['image_url'], FILTER_VALIDATE_URL));
-        $book->setType($_POST['type']);
-        $book->setCategoryId(intval($_POST['category_id']));
-
-        // Voeg het boek toe
-        if ($book->addBook()) {
-            header("Location: book_list.php"); // Redirect naar de lijst van boeken
-            exit();
-        } else {
-            $error_message = "Failed to add book.";
-        }
-    } catch (Exception $e) {
-        $error_message = $e->getMessage(); // Toon foutmelding
+    // Voeg boek toe vanuit formuliergegevens
+    $error_message = $book->addBookFromPost($_POST);
+    
+    // Als er geen fout is, redirect naar admin dashboard
+    if ($error_message === "") {
+        header("Location: admin_dashboard.php"); // Redirect naar de lijst van boeken
+        exit();
     }
 }
 ?>
@@ -68,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <h2>Add New Book</h2>
 
-    <?php if (isset($error_message)): ?>
+    <?php if (!empty($error_message)): ?>
         <div style="color: red;">
             <p><?php echo $error_message; ?></p>
         </div>
