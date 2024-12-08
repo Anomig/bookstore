@@ -77,7 +77,7 @@ body
 }
 
 .cart-summary .btn-checkout {
-  background-color: #ff6600;
+  background-color: #8b572a;
   color: white;
   padding: 15px 30px;
   text-decoration: none;
@@ -86,7 +86,7 @@ body
 }
 
 .cart-summary .btn-checkout:hover {
-  background-color: #ff4500;
+  background-color: #8b572a;
 }
 
 .product-grid {

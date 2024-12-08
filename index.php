@@ -69,6 +69,16 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
+    <div class="header">
+        <div class="logo">Bookstore</div>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="cart.php">Cart</a>
+            <a href="logout.php">Logout</a>
+        </nav>
+    </div>
+
+
     <h1>Welcome to the shop!</h1>
 
     <!-- Zoekformulier -->

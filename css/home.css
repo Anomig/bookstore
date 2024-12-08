@@ -1,99 +1,181 @@
 /* Algemene stijlen */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fdf6e4; /* Warme beige achtergrond */
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
-  color: #333;
+  color: #5a4635; /* Zachte bruine tekstkleur */
 }
 
-h1, h2 {
-  color: #444;
-  margin: 0 0 20px;
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #8b572a; /* Diepere bruine kleur voor titels */
 }
 
-p {
-  margin: 0 0 20px;
-  line-height: 1.6;
-}
-
-/* Navigatie */
-nav {
-  background-color: brown; 
-  padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-}
-
-nav ul li {
-  margin: 0;
-}
-
-nav ul li a {
-  color: brown;
+a {
   text-decoration: none;
-  padding: 10px 15px;
-  display: block;
-  transition: background-color 0.3s, color 0.3s;
+  color: inherit;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
-  background-color: brown;
-  color: #e0f7ff;
+a:hover {
+  text-decoration: underline;
 }
 
-/* Logout-knop apart stijlen */
-nav ul li a.logout-btn {
-  background-color: #ff5533;
-  border-radius: 4px;
+/* Header */
+.header {
+  background-color: #d4a373; /* Warme karameltint */
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-nav ul li a.logout-btn:hover {
-  background-color: #ff2200;
+.header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff3e0; /* Gebroken wit */
 }
 
-/* Hoofdinhoud */
-.content {
-  max-width: 800px;
-  margin: 40px auto;
-  background-color: #ffffff;
+.header nav {
+  display: flex;
+  gap: 20px;
+}
+
+.header nav a {
+  color: #fff3e0;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.header nav a:hover {
+  color: #ffd7aa; /* Licht oranje accent */
+}
+
+/* Container voor de productlijst */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
+}
+
+/* Productrooster */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Productkaartje */
+.product {
+  background-color: #fff8ec; /* Zacht gebroken wit */
+  border: 1px solid #d4a373;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
 }
 
-.content h2 {
-  margin-bottom: 10px;
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.welcome-message {
-  font-size: 1.1rem;
-  color: #555;
+.product img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
 }
 
-/* Responsieve stijlen */
-@media (max-width: 768px) {
-  nav ul {
-      flex-direction: column;
-      align-items: flex-start;
-  }
+.product-info {
+  padding: 15px;
+}
 
-  nav ul li a {
-      width: 100%;
-      padding: 10px 20px;
-  }
+.product-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #8b572a;
+}
 
-  .content {
-      margin: 20px;
-      padding: 15px;
-  }
+.product-info p {
+  margin: 5px 0;
+  color: #5a4635;
+}
+
+.product-info .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #8b572a; /* Warme oranje tint */
+}
+
+.btn-add-to-cart {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #d17b49;
+  color: #fff8ec;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #b56335; /* Diepere oranje tint */
+}
+
+/* Zoek- en filterformulieren */
+form {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+input[type="text"], select {
+  width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #d4a373;
+  border-radius: 4px;
+  background-color: #fff8ec;
+  color: #5a4635;
+}
+
+input[type="submit"] {
+  background-color: #8b572a;
+  color: #fff8ec;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #b56335;
+}
+
+/* Footer */
+.footer {
+  background-color: #8b572a;
+  color: #fff3e0;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+}
+
+.footer a {
+  color: #ffd7aa;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }

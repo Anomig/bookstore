@@ -1,0 +1,105 @@
+/* Algemene stijlen */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fdf6e4; /* Warme beige achtergrond */
+    margin: 0;
+    padding: 0;
+    color: #5a4635; /* Zachte bruine tekstkleur */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Login container */
+.Login {
+    background-color: #fff8ec; /* Zacht gebroken wit */
+    border: 1px solid #d4a373; /* Warme karameltint */
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Titel */
+form h2 {
+    color: #8b572a;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Foutmelding */
+.form_error {
+    background-color: #ffd7aa;
+    color: #8b572a;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+/* Formuliervelden */
+.form_field {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form_field label {
+    display: block;
+    font-size: 1rem;
+    color: #5a4635;
+    margin-bottom: 8px;
+}
+
+.form_field input[type="text"],
+.form_field input[type="password"],
+.form_field input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #d4a373;
+    border-radius: 8px;
+    background-color: #fff8ec;
+    color: #5a4635;
+    outline: none;
+}
+
+.form_field input[type="text"]:focus,
+.form_field input[type="password"]:focus {
+    border-color: #d17b49;
+    box-shadow: 0 0 4px rgba(209, 123, 73, 0.5);
+}
+
+/* Knoppen */
+.btn_primary {
+    background-color: #d17b49; /* Warme oranje tint */
+    color: #fff8ec;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+}
+
+.btn_primary:hover {
+    background-color: #b56335; /* Donkere oranje tint */
+}
+
+/* Link naar registratie */
+.form_field a {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #8b572a;
+    text-decoration: none;
+    text-align: center;
+}
+
+.form_field a:hover {
+    text-decoration: underline;
+}
