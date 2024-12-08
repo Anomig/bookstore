@@ -17,9 +17,22 @@ $book = new Book($db);
 
 // Haal alle product-ID's op uit de sessie winkelmandje
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    $cart_product_ids = implode(',', $_SESSION['cart']); // Maak een komma-gescheiden lijst van product-IDs
-    $stmt = $db->query("SELECT * FROM products WHERE id IN ($cart_product_ids)");
-    $cart_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Filter the product IDs to ensure they are numeric
+    $cart_product_ids = array_filter($_SESSION['cart'], 'is_numeric');
+    
+    // If there are valid product IDs, form the SQL query
+    if (!empty($cart_product_ids)) {
+        $placeholders = str_repeat('?,', count($cart_product_ids) - 1) . '?';  // Create placeholders for the prepared statement
+        
+        // Prepare the query with placeholders
+        $stmt = $db->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
+        
+        // Execute the query with the actual product IDs
+        $stmt->execute(array_values($cart_product_ids)); // Bind the actual product IDs
+        $cart_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $cart_products = [];
+    }
 } else {
     $cart_products = [];
 }
